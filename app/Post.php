@@ -22,5 +22,7 @@ class Post extends Model
         
         $this->comments()->create(compact('body','user_id'));
     }
-    
+    public function post(){
+        return $this->belongsToMany(Categories::class);
+    }
 }

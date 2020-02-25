@@ -6,16 +6,16 @@
 
     <div class="post">
 
+        {{-- Post --}}
         <h1>{{$post->title}}</h1>
-        <small>
-            by
-            <b>{{$post->user->name}}
-            </b>,
-            {{$post->created_at->locale('pl_PL')->diffForHumans()}}
-        </small> <br />
 
+
+        <small> by <b>{{$post->user->name}}</b>, {{$post->created_at->locale('pl_PL')->diffForHumans()}} </small> <br />
+       
+       
         {{$post->body}}
         
+        {{-- Usuwanie posta --}}
         @if(Auth::check()&&Auth::User()->name==$post->user->name)
         <br />
         <small style="color:red;float:right;">
@@ -25,6 +25,8 @@
         </small>
         @endif
         
+
+        {{-- Komentarze --}}
         <hr />
         <small style="float:left;">Komentarze: </small>
         <br />
@@ -38,6 +40,7 @@
         </li>
         @endforeach
 
+        {{-- Dodawanie komentarza --}}
         <hr/>
         <form action='/posts/{{$post->id}}/comments' method="POST">
             @csrf

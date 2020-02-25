@@ -55,4 +55,14 @@ class PostController extends Controller
             else return back()->withErrors(['message'=>'Wystąpił błąd podczas usuwania posta.']);
            
     }
+
+    public function userposts($id){
+        
+        $user=User::find($id);
+        $posts=$user->post()->get();
+        
+        return view('user.posts',compact('posts'));
+
+
+    }
 }
